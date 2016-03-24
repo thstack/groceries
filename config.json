@@ -1,0 +1,65 @@
+{
+    "program": {
+        "web": {
+            "simple_html": {
+                "type": "file",
+                "dirname": "/web",
+                "filename": ["simple.html"]
+            },
+            "simple_css": {
+                "type": "file",
+                "dirname": "/web",
+                "filename": ["simple.css"]
+            },
+            "simple_js": {
+                "type": "file",
+                "dirname": "/web",
+                "filename": ["simple.js"]
+            },
+            "simple_web": {
+                "type": "dir",
+                "dirname": "/web/simple-web",
+                "filename": ["index.html", "main.js", "style.css"]
+            }
+        },
+        "shell": {
+            "simple_bash": {
+                "type": "file",
+                "dirname": "/shell",
+                "filename": ["simple-bash.sh"]
+            }
+        },
+        "python": {
+            "simple_python": {
+                "type": "file",
+                "dirname": "/python",
+                "filename": ["simple.py"]
+            }
+        },
+        "django": {
+            "1.8.4": {
+                "type": "dir",
+                "dirname": "myproject",
+                "filename": [
+                    "db.sqlite3",
+                    "manage.py",
+                    "myapp/__init__.py",
+                    "myapp/admin.py",
+                    "myapp/migrations/__init__.py",
+                    "myapp/models.py",
+                    "myapp/tests.py",
+                    "myapp/views.py",
+                    "myproject/__init__.py",
+                    "myproject/settings.py",
+                    "myproject/urls.py",
+                    "myproject/wsgi.py"
+                ]
+            }
+        }
+    },
+    "topic": {
+        "webfrontend": ["web"],
+        "djangopractice": ["django"],
+        "commoncodingpractice": ["shell", "python"]
+    }
+}
