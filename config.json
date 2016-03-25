@@ -3,43 +3,43 @@
         "web": {
             "simple_html": {
                 "type": "file",
-                "dirname": "/web",
+                "dirname": "web/",
                 "filename": ["simple.html"]
             },
             "simple_css": {
                 "type": "file",
-                "dirname": "/web",
+                "dirname": "web/",
                 "filename": ["simple.css"]
             },
             "simple_js": {
                 "type": "file",
-                "dirname": "/web",
+                "dirname": "web/",
                 "filename": ["simple.js"]
             },
             "simple_web": {
                 "type": "dir",
-                "dirname": "/web/simple-web",
+                "dirname": "web/simple-web/",
                 "filename": ["index.html", "main.js", "style.css"]
             }
         },
         "shell": {
             "simple_bash": {
                 "type": "file",
-                "dirname": "/shell",
+                "dirname": "shell/",
                 "filename": ["simple-bash.sh"]
             }
         },
         "python": {
             "simple_python": {
                 "type": "file",
-                "dirname": "/python",
+                "dirname": "python/",
                 "filename": ["simple.py"]
             }
         },
         "django": {
             "1.8.4": {
                 "type": "dir",
-                "dirname": "myproject",
+                "dirname": "django/1.8.4/myproject/",
                 "filename": [
                     "db.sqlite3",
                     "manage.py",
