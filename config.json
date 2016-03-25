@@ -4,17 +4,17 @@
             "simple_html": {
                 "type": "file",
                 "dirname": "/web",
-                "filename": "simple.html"
+                "filename": ["simple.html"]
             },
             "simple_css": {
                 "type": "file",
                 "dirname": "/web",
-                "filename": "simple.css"
+                "filename": ["simple.css"]
             },
             "simple_js": {
                 "type": "file",
                 "dirname": "/web",
-                "filename": "simple.js"
+                "filename": ["simple.js"]
             },
             "simple_web": {
                 "type": "dir",
@@ -26,14 +26,14 @@
             "simple_bash": {
                 "type": "file",
                 "dirname": "/shell",
-                "filename": "simple-bash.sh"
+                "filename": ["simple-bash.sh"]
             }
         },
         "python": {
             "simple_python": {
                 "type": "file",
                 "dirname": "/python",
-                "filename": "simple.py"
+                "filename": ["simple.py"]
             }
         },
         "django": {
