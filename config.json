@@ -49,6 +49,7 @@
                     "myapp/models.py",
                     "myapp/tests.py",
                     "myapp/views.py",
+                    "myapp/templates/index.html",
                     "myproject/__init__.py",
                     "myproject/settings.py",
                     "myproject/urls.py",
