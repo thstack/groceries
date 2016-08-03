@@ -4,39 +4,41 @@
 
 
 """
-
-type: file/dir
+Note:
+    g_type: include 'file'/'dir'
+    g_key: format is "<Type>:<Name>"
 """
 
 
 TEMPLATES = {
     "web": {                # Type
         "simple_html": {    # Name
-            "g_key": "t:web:simple_html",
+            "g_key": "web:simple_html",
             "alias": "Simple Html Temlate",
-            "type": "file",
-            "dirname": "web/",
-            "filename": ["simple.html"]
+            "g_type": "file",
+            "g_dirname": "web/",
+            "filename": "simple.html"
         },
         "simple_css": {
             "g_key": "web:simple_css",
             "alias": "Simple Css",
-            "type": "file",
-            "dirname": "web/",
-            "filename": ["simple.css"]
+            "g_type": "file",
+            "g_dirname": "web/",
+            "filename": "simple.css"
         },
         "simple_js": {
             "g_key": "web:simple_js",
             "alias": "",
-            "type": "file",
-            "dirname": "web/",
-            "filename": ["simple.js"]
+            "g_type": "file",
+            "g_dirname": "web/",
+            "filename": "simple.js"
         },
         "simple_web": {
             "name": "",
             "g_key": "web:simple_web",
-            "type": "dir",
-            "dirname": "web/simple-web/",
+            "g_type": "dir",
+            "g_dirname": "web/simple-web/",
+            "dirname": "myweb/",
             "filename": ["index.html", "main.js", "style.css"]
         }
     },
@@ -44,26 +46,27 @@ TEMPLATES = {
         "simple_bash": {
             "name": "",
             "g_key": "shell:simple_bash",
-            "type": "file",
-            "dirname": "shell/",
-            "filename": ["simple-bash.sh"]
+            "g_type": "file",
+            "g_dirname": "shell/",
+            "filename": "simple-bash.sh"
         }
     },
     "python": {
         "simple_python": {
             "name": "",
             "g_key": "python:simple_python",
-            "type": "file",
-            "dirname": "python/",
-            "filename": ["simple.py"]
+            "g_type": "file",
+            "g_dirname": "python/",
+            "filename": "simple.py"
         }
     },
     "django": {
         "1.8.4": {
             "name": "",
             "g_key": "django:1.8.4",
-            "type": "dir",
-            "dirname": "django/1.8.4/myproject/",
+            "g_type": "dir",
+            "g_dirname": "django/1.8.4/myproject/",
+            "dirname": "myproject/",
             "run_command": "python manage.py runserver 0.0.0.0:8000",
             "filename": [
                 "db.sqlite3",
