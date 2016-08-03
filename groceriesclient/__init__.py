@@ -69,8 +69,8 @@ def get_files(keys, without_keys=[]):
             continue
 
         if g_type == 'dir':
-            g_dirname = r['g_dirname']
-            filename = [g_dirname + f for f in filename if f]
+            dirname = r['dirname']
+            filename = [dirname + f for f in filename if f]
         else:
             filename = [filename,]
         res.extend(filename)
