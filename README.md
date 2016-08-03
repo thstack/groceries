@@ -37,3 +37,7 @@ The templates supplied for coding on Fuvism Online.
         └── simple.js
 
     10 directories, 22 files
+
+# Install
+
+python setup.py install
