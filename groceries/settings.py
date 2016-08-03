@@ -64,6 +64,7 @@ TEMPLATES = {
             "g_key": "django:1.8.4",
             "type": "dir",
             "dirname": "django/1.8.4/myproject/",
+            "run_command": "python manage.py runserver 0.0.0.0:8000",
             "filename": [
                 "db.sqlite3",
                 "manage.py",

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # Author: SimonLuo <simonluo@thstack.com>
-from groceries import config as g_config
+from groceries import settings as g_config
 
 
 def get_topic_templates(topic=None):
@@ -23,7 +23,7 @@ def get_topic_templates(topic=None):
         for tname in g_config.TOPIC_INCLUDES[topic]:
             res[tname] = g_config.TEMPLATES[tname]
     else:
-        res = g_config.TOPIC_INCLUDES
+        res = g_config.TEMPLATES
     return (0, 'Success!', res)
 
 
