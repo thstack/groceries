@@ -10,6 +10,13 @@ Note:
 """
 
 
+try:
+    from groceries.local.local_settings import *
+except ImportError:
+    raise Exception("No local_settings file found in groceries/local/local_settings.py")
+    exit()
+
+
 TEMPLATES = {
     "web": {                # Type
         "simple_html": {    # Name

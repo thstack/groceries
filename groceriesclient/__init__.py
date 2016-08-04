@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # Author: SimonLuo <simonluo@thstack.com>
-from groceries import settings as g_config
+from groceries import settings
 
 
 def get_topic_templates(topic=None):
@@ -15,21 +15,21 @@ def get_topic_templates(topic=None):
             'filename': []}
     }
     """
-    if topic and topic not in g_config.TOPIC_INCLUDES.keys():
+    if topic and topic not in settings.TOPIC_INCLUDES.keys():
         return (-1, 'Topic does not have templates!', None)
 
     res = {}
     if topic:
-        for tname in g_config.TOPIC_INCLUDES[topic]:
-            res[tname] = g_config.TEMPLATES[tname]
+        for tname in settings.TOPIC_INCLUDES[topic]:
+            res[tname] = settings.TEMPLATES[tname]
     else:
-        res = g_config.TEMPLATES
+        res = settings.TEMPLATES
     return (0, 'Success!', res)
 
 
 def get_all_by_gkey():
     res = {}
-    for key, values in g_config.TEMPLATES.items():
+    for key, values in settings.TEMPLATES.items():
         for v_k, v_v in values.items():
             res[v_v['g_key']] = v_v
     return (0, 'Success!', res)
@@ -40,9 +40,9 @@ def is_valid(g_key):
     if len(k) != 2:
         return (1, 'g_key must include one ":"!', None)
 
-    if k[0] not in g_config.TEMPLATES:
+    if k[0] not in settings.TEMPLATES:
         return (1, 'g_key not exist!', None)
-    elif k[1] not in g_config.TEMPLATES[k[0]]:
+    elif k[1] not in settings.TEMPLATES[k[0]]:
         return (1, 'g_key not exist!', None)
     return (0, 'Success', None)
 
@@ -54,7 +54,7 @@ def get_template_config(g_key):
         return (s, m, r)
 
     key1, key2 = g_key.split(':')
-    return (0, 'Success!', g_config.TEMPLATES[key1][key2])
+    return (0, 'Success!', settings.TEMPLATES[key1][key2])
 
 
 def get_files(keys, without_keys=[]):
@@ -86,8 +86,9 @@ def get_file(g_key, filename=None):
     g_type, g_dirname, g_filename = r['g_type'], r['g_dirname'], r['filename'] 
 
     if g_type == 'dir':
-        if not filename or filename not in g_filename:
-            return (1, 'filename does not in direcotry!', None)
+        # if not filename or filename not in g_filename:
+        #     return (1, 'filename does not in direcotry!', None)
+        filename.replace(r['dirname'], '')
     else:
         filename = g_filename
 
@@ -111,7 +112,7 @@ def get_template_file(filename):
     return (0, 'Success!', content)
 
 
-# def get_g_config(g_key, filename=None):
+# def get_settings(g_key, filename=None):
 #     """Get groceries's config, incloud:
 #
 #         type, dirname, filenames
@@ -129,7 +130,7 @@ def get_template_file(filename):
 #         g_data = g_data[k]
 #
 #     if 'type' not in g_data or 'dirname' not in g_data or 'filename' not in g_data:
-#         return (-1, 'Can not get a valid g_config data!', None)
+#         return (-1, 'Can not get a valid settings data!', None)
 #
 #     g_type = g_data['type']
 #     g_dirname = g_data['dirname']
