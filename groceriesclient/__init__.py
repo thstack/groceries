@@ -86,9 +86,13 @@ def get_file(g_key, filename=None):
     g_type, g_dirname, g_filename = r['g_type'], r['g_dirname'], r['filename'] 
 
     if g_type == 'dir':
-        # if not filename or filename not in g_filename:
-        #     return (1, 'filename does not in direcotry!', None)
-        filename.replace(r['dirname'], '')
+        if not filename:
+            return (1, 'Need filename!', None)
+
+        dirname = r['dirname']
+        filename = filename.replace(dirname, '', 1)
+        if filename not in g_filename:
+            return (1, 'filename does not in direcotry!', None)
     else:
         filename = g_filename
 
