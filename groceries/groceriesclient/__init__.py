@@ -12,7 +12,7 @@ def get_topic_templates(topic=None):
             'g_key': '',
             'type': '',
             'dirname': '',
-            'filename': []}
+            'filename': {}}
     }
     """
     if topic and topic not in settings.TOPIC_INCLUDES.keys():
@@ -58,23 +58,21 @@ def get_template_config(g_key):
 
 
 def get_files(keys, without_keys=[]):
-    res = []
+    res = {}
     for g_key in keys:
-        s, m, r = get_template_config(g_key)
-        if s != 0:
-            return (s, m, r)
-        g_type, filename = r['g_type'], r['filename'] 
-
         if g_key in without_keys:
             continue
 
-        if g_type == 'dir':
-            dirname = r['dirname']
-            filename = [dirname + f for f in filename if f]
-        else:
-            filename = [filename,]
-        res.extend(filename)
+        s, m, r = get_template_config(g_key)
+        if s != 0:
+            return (s, m, r)
+        g_type, g_dirname, g_files = r['g_type'], r['g_dirname'], r['files'] 
 
+        if g_type == 'file':
+            res[g_files['filename']] =  {'is_text': c['is_text']}
+        elif g_type == 'dir':
+            for filename, c in g_files.items():
+                res[filename] = c
     return (0, 'Success!', res)
 
 
@@ -82,18 +80,16 @@ def get_file(g_key, filename=None):
     s, m, r = get_template_config(g_key)
     if s != 0:
         return (s, m, r)
-    g_type, g_dirname, g_filename = r['g_type'], r['g_dirname'], r['filename'] 
+    g_type, g_dirname, g_files = r['g_type'], r['g_dirname'], r['files'] 
 
     if g_type == 'dir':
-        if not filename:
+        if not g_files:
             return (1, 'Need filename!', None)
 
-        dirname = r['dirname']
-        filename = filename.replace(dirname, '', 1)
-        if filename not in g_filename:
+        if filename not in g_files:
             return (1, 'filename does not in direcotry!', None)
     else:
-        filename = g_filename
+        filename = g_files['filename']
 
     try:
         content = open(settings.PATH + '/' + g_dirname + filename).read()
