@@ -78,7 +78,6 @@ def get_files(keys, without_keys=[]):
     return (0, 'Success!', res)
 
 
-
 def get_file(g_key, filename=None):
     s, m, r = get_template_config(g_key)
     if s != 0:
@@ -98,10 +97,18 @@ def get_file(g_key, filename=None):
 
     try:
         content = open(settings.PATH + '/' + g_dirname + filename).read()
+        if '\0' in content:
+            content = 'Not text file'
         content = content[0:-1] if content and content[-1] == '\n' else content
     except Exception as e:
         return (-1, str(e), None)
     return (0, 'Success!', content)
+
+
+def is_text(content):
+    if '\0' in content:
+        return (1, 'Not text file!', None)
+    return (0, 'Success!', None)
 
 
 def get_template_file(filename):
