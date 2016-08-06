@@ -93,7 +93,7 @@ def get_file(g_key, filename=None):
         filename = g_files['filename']
 
     try:
-        content = open(settings.PATH + '/' + g_dirname + filename).read()
+        content = open(settings.PATH + '/groceries/templates/' + g_dirname + filename).read()
         if '\0' in content:
             content = 'Not text file'
         content = content[0:-1] if content and content[-1] == '\n' else content
