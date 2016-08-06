@@ -76,8 +76,8 @@ TEMPLATES = {
     },
     "python": {
         "simple_python": {
-            "name": "",
             "g_key": "python:simple_python",
+            "alias": "Simple Python Temlate(Python 2.7)",
             "g_type": "file",
             "g_dirname": "python/",
             "files": {
@@ -88,8 +88,8 @@ TEMPLATES = {
     },
     "django": {
         "1.8.4": {
-            "name": "Django Template(1.8.4)",
             "g_key": "django:1.8.4",
+            "alias": "Django Template(1.8.4)",
             "g_type": "dir",
             "g_dirname": "django/1.8.4/",
             "run_command": "python manage.py runserver 0.0.0.0:8000",
