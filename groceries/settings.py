@@ -62,7 +62,7 @@ TEMPLATES = {
             }
         }
     },
-    "shell": {
+    "linuxbash": {
         "simple_bash": {
             "g_key": "shell:simple_bash",
             "alias": "Simple Bash Template",
@@ -119,5 +119,5 @@ TOPIC_INCLUDES = {
     # <Topic Name>: [<Template Type>, ]
     "web": ["web"],
     "django": ["django"],
-    "coding": ["shell", "python"]
+    "coding": ["linuxbash", "python"]
 }
