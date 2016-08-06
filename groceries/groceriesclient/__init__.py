@@ -16,7 +16,7 @@ def get_topic_templates(topic=None):
     }
     """
     if topic and topic not in settings.TOPIC_INCLUDES.keys():
-        return (-1, 'Topic does not have templates!', None)
+        return (0, 'Topic does not have templates!', None)
 
     res = {}
     if topic:
