@@ -64,10 +64,10 @@ TEMPLATES = {
     },
     "linuxbash": {
         "simple_bash": {
-            "g_key": "shell:simple_bash",
+            "g_key": "linuxbash:simple_bash",
             "alias": "Simple Bash Template",
             "g_type": "file",
-            "g_dirname": "shell/",
+            "g_dirname": "linuxbash/",
             "files": {
                 "filename": "simple-bash.sh",
                 "is_text": True
