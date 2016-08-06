@@ -69,7 +69,7 @@ TEMPLATES = {
             "g_type": "file",
             "g_dirname": "shell/",
             "files": {
-                "simple-bash.sh": {"is_text": True},
+                "filename": "simple-bash.sh",
                 "is_text": True
             }
         }
@@ -81,7 +81,7 @@ TEMPLATES = {
             "g_type": "file",
             "g_dirname": "python/",
             "files": {
-                "simple.py": {"is_text": True},
+                "filename": "simple.py",
                 "is_text": True
             }
         }

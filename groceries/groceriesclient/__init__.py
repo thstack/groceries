@@ -27,7 +27,7 @@ def get_topic_templates(topic=None):
     return (0, 'Success!', res)
 
 
-def get_all_by_gkey():
+def get_configs_by_gkey():
     res = {}
     for key, values in settings.TEMPLATES.items():
         for v_k, v_v in values.items():
@@ -77,17 +77,18 @@ def get_files(keys, without_keys=[]):
 
 
 def get_file(g_key, filename=None):
+    """目录模版需要指定文件名"""
     s, m, r = get_template_config(g_key)
     if s != 0:
         return (s, m, r)
     g_type, g_dirname, g_files = r['g_type'], r['g_dirname'], r['files'] 
 
     if g_type == 'dir':
-        if not g_files:
+        if not filename:
             return (1, 'Need filename!', None)
 
         if filename not in g_files:
-            return (1, 'filename does not in direcotry!', None)
+            return (1, 'filename does not exist!', None)
     else:
         filename = g_files['filename']
 
