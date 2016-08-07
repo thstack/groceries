@@ -10,7 +10,7 @@ TEMPLATE_PATH = settings.PATH + '/' + 'groceries/templates/'
 def get_templates(topic=None, g_key=None):
     """Get topic templates"""
     if topic and topic not in settings.TOPIC_INCLUDES.keys():
-        return (1, 'Topic does not have templates!', None)
+        return (0, 'Topic does not have templates!', None)
 
     res = {}
     if topic:
