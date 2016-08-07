@@ -4,19 +4,10 @@
 from groceries import settings
 
 
-def get_topic_templates(topic=None):
-    """Get topic templates
-
-    {
-        <TYPE> : {
-            'g_key': '',
-            'type': '',
-            'dirname': '',
-            'filename': {}}
-    }
-    """
+def get_templates(topic=None, g_key=None):
+    """Get topic templates"""
     if topic and topic not in settings.TOPIC_INCLUDES.keys():
-        return (0, 'Topic does not have templates!', None)
+        return (1, 'Topic does not have templates!', None)
 
     res = {}
     if topic:
@@ -24,6 +15,16 @@ def get_topic_templates(topic=None):
             res[tname] = settings.TEMPLATES[tname]
     else:
         res = settings.TEMPLATES
+
+    if g_key:
+        s, m, r = is_valid(g_key)
+        if s != 0:
+            return (s, m, r)
+        k1, k2 = r
+        if k1 not in res or k2 not in res[k1]:
+            return (1, '[GS] g_key not exist!', None)
+        res = res[k1][k2]
+
     return (0, 'Success!', res)
 
 
@@ -44,26 +45,16 @@ def is_valid(g_key):
         return (1, 'g_key not exist!', None)
     elif k[1] not in settings.TEMPLATES[k[0]]:
         return (1, 'g_key not exist!', None)
-    return (0, 'Success', None)
+    return (0, 'Success', k)
 
 
-def get_template_config(g_key):
-    """Get template config for one g_key"""
-    s, m, r = is_valid(g_key)
-    if s != 0:
-        return (s, m, r)
-
-    key1, key2 = g_key.split(':')
-    return (0, 'Success!', settings.TEMPLATES[key1][key2])
-
-
-def get_files(keys, without_keys=[]):
+def get_templatefiles(keys, without_keys=[]):
     res = {}
     for g_key in keys:
         if g_key in without_keys:
             continue
 
-        s, m, r = get_template_config(g_key)
+        s, m, r = get_templates(g_key=g_key)
         if s != 0:
             return (s, m, r)
         g_type, g_dirname, g_files = r['g_type'], r['g_dirname'], r['files'] 
@@ -76,25 +67,34 @@ def get_files(keys, without_keys=[]):
     return (0, 'Success!', res)
 
 
-def get_file(g_key, filename=None):
-    """目录模版需要指定文件名"""
-    s, m, r = get_template_config(g_key)
+def get_templatefile_content(g_key, filename=None):
+    """获取模版内容"""
+    s, m, r = get_templates(g_key=g_key)
     if s != 0:
         return (s, m, r)
     g_type, g_dirname, g_files = r['g_type'], r['g_dirname'], r['files'] 
 
+    res = {}
+    filenames = []
     if g_type == 'dir':
         if not filename:
-            filenames = g_files.keys()
+            for f, v in g_files.items():
+                if v['is_text'] is False:
+                    res[f] = 'Not text file'
+                else:
+                    filenames.append(f)
         elif filename not in g_files:
-            return (1, 'filename does not exist!', None)
+            return (1, '[GS] filename does not exist!', None)
         else:
             filenames = [filename]
-    else:
+    elif g_type == 'file':
+        if g_files['is_text'] is False:
+            res[g_files['filename']] = 'Not text file'
         filenames = [g_files['filename']]
+    else:
+        raise Exception()
 
     try:
-        res = {}
         for filename in filenames:
             content = open(settings.PATH + '/groceries/templates/' + g_dirname + filename).read()
             if '\0' in content:
@@ -104,48 +104,3 @@ def get_file(g_key, filename=None):
     except Exception as e:
         return (-1, str(e), None)
     return (0, 'Success!', res)
-
-
-def is_text(content):
-    if '\0' in content:
-        return (1, 'Not text file!', None)
-    return (0, 'Success!', None)
-
-
-def get_template_file(filename):
-    g_key = filename
-    filename = g_key.replace('program:', '').replace(':', '/')
-
-    try:
-        content = open('/opt/git/groceries/' + filename).read()
-        content = content[0:-1] if content and content[-1] == '\n' else content
-    except Exception as e:
-        return (-1, str(e), None)
-    return (0, 'Success!', content)
-
-
-# def get_settings(g_key, filename=None):
-#     """Get groceries's config, incloud:
-#
-#         type, dirname, filenames
-#     """
-#     # import ipdb; ipdb.set_trace()
-#     if filename:
-#         g_key = g_key.replace(':' + filename.replace('/', ':'), '')
-#
-#     keys = [k for k in g_key.split(':') if k]
-#
-#     g_data = settings.GroceriesConfig.GROCERIES_JSON
-#     for k in keys:
-#         if 'type' in g_data and 'dirname' in g_data and 'filename' in g_data:
-#             break
-#         g_data = g_data[k]
-#
-#     if 'type' not in g_data or 'dirname' not in g_data or 'filename' not in g_data:
-#         return (-1, 'Can not get a valid settings data!', None)
-#
-#     g_type = g_data['type']
-#     g_dirname = g_data['dirname']
-#     g_filenames = g_data['filename']
-#
-#     return (0, 'Success', (g_type, g_dirname, g_filenames))
