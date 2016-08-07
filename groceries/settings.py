@@ -8,6 +8,10 @@ Note:
     g_type: include 'file'/'dir'
     g_key: format is "<Type>:<Name>"
 """
+# from groceries.profiles import python as profile_python
+# from groceries.profiles import linuxbash as profile_linuxbash
+# from groceries.profiles import webfront as profile_webfront
+# from groceries.profiles import webserver as profile_webserver
 
 
 try:
@@ -115,9 +119,32 @@ TEMPLATES = {
 Template_TYPES = {
 }
 
+# def get_template_init_cmds(pm_root, pm_me, vm_root, vm_me, learn_root, **kwargs): 
+#     """
+#     Worflow:
+#         1. Move db.sqlite3 to user data directory;
+#         2. Rewrite django setttings with new database config
+#     """
+#     target_dir = pm_root + learn_root
+#     data_dir = pm_me + '.data/learn/' + learn_root
+#     db_dir = mv_me + '.data/learn/' + learn_root
+# 
+#     res = [
+#         'mv -f %smyproject/db.sqlite3 %s' % (target_dir, data_dir),
+#         'sed -i "81 s/BASE_DIR/\'%s\'/g" %smyproject/myproject/settings.py' % (data_dir_vm.replace('/', '\/'), target_dir)]
+#     return (0, 'Success!', res)
+# 
+# INIT_CMDS = {
+#     # <g_key>: []
+#     'django:1.8.4': {
+#         'params': {},
+#         'func': init_django,
+#     }
+# }
+
 TOPIC_INCLUDES = {
     # <Topic Name>: [<Template Type>, ]
-    "web": ["web"],
-    "django": ["django"],
+    "webfront": ["web"],
+    "webserver": ["django"],
     "coding": ["linuxbash", "python"]
 }
