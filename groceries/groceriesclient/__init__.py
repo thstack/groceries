@@ -85,21 +85,25 @@ def get_file(g_key, filename=None):
 
     if g_type == 'dir':
         if not filename:
-            return (1, 'Need filename!', None)
-
-        if filename not in g_files:
+            filenames = g_files.keys()
+        elif filename not in g_files:
             return (1, 'filename does not exist!', None)
+        else:
+            filenames = [filename]
     else:
-        filename = g_files['filename']
+        filenames = [g_files['filename']]
 
     try:
-        content = open(settings.PATH + '/groceries/templates/' + g_dirname + filename).read()
-        if '\0' in content:
-            content = 'Not text file'
-        content = content[0:-1] if content and content[-1] == '\n' else content
+        res = {}
+        for filename in filenames:
+            content = open(settings.PATH + '/groceries/templates/' + g_dirname + filename).read()
+            if '\0' in content:
+                content = 'Not text file'
+            content = content[0:-1] if content and content[-1] == '\n' else content
+            res[filename] = content
     except Exception as e:
         return (-1, str(e), None)
-    return (0, 'Success!', content)
+    return (0, 'Success!', res)
 
 
 def is_text(content):
