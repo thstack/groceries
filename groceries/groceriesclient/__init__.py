@@ -4,6 +4,9 @@
 from groceries import settings
 
 
+TEMPLATE_PATH = settings.PATH + '/' + 'groceries/templates/'
+
+
 def get_templates(topic=None, g_key=None):
     """Get topic templates"""
     if topic and topic not in settings.TOPIC_INCLUDES.keys():
