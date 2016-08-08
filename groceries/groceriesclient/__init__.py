@@ -51,6 +51,18 @@ def is_valid(g_key):
     return (0, 'Success', k)
 
 
+def is_file(g_type):
+    if g_type == 'file':
+        return True
+    return False
+
+
+def is_dir(g_type):
+    if g_type == 'dir':
+        return True
+    return False
+
+
 def get_templatefiles(keys, without_keys=[]):
     res = {}
     for g_key in keys:
