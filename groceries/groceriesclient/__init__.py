@@ -7,8 +7,8 @@ from groceries import settings
 TEMPLATE_PATH = settings.PATH + '/' + 'groceries/templates/'
 
 
-def get_templates(topic=None, g_key=None):
-    """Get topic templates"""
+def get_templateconfigs(topic=None, g_key=None):
+    """Get topic template config"""
     if topic and topic not in settings.TOPIC_INCLUDES.keys():
         return (0, 'Topic does not have templates!', None)
 
@@ -69,13 +69,13 @@ def get_templatefiles(keys, without_keys=[]):
         if g_key in without_keys:
             continue
 
-        s, m, r = get_templates(g_key=g_key)
+        s, m, r = get_templateconfigs(g_key=g_key)
         if s != 0:
             return (s, m, r)
         g_type, g_dirname, g_files = r['g_type'], r['g_dirname'], r['files'] 
 
         if g_type == 'file':
-            res[g_files['filename']] =  {'is_text': c['is_text']}
+            res[g_files['filename']] =  {'is_text': g_files['is_text']}
         elif g_type == 'dir':
             for filename, c in g_files.items():
                 res[filename] = c
@@ -84,7 +84,7 @@ def get_templatefiles(keys, without_keys=[]):
 
 def get_templatefile_content(g_key, filename=None):
     """获取模版内容"""
-    s, m, r = get_templates(g_key=g_key)
+    s, m, r = get_templateconfigs(g_key=g_key)
     if s != 0:
         return (s, m, r)
     g_type, g_dirname, g_files = r['g_type'], r['g_dirname'], r['files'] 

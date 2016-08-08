@@ -116,33 +116,8 @@ TEMPLATES = {
     }
 }
 
-Template_TYPES = {
-}
 
-# def get_template_init_cmds(pm_root, pm_me, vm_root, vm_me, learn_root, **kwargs): 
-#     """
-#     Worflow:
-#         1. Move db.sqlite3 to user data directory;
-#         2. Rewrite django setttings with new database config
-#     """
-#     target_dir = pm_root + learn_root
-#     data_dir = pm_me + '.data/learn/' + learn_root
-#     db_dir = mv_me + '.data/learn/' + learn_root
-# 
-#     res = [
-#         'mv -f %smyproject/db.sqlite3 %s' % (target_dir, data_dir),
-#         'sed -i "81 s/BASE_DIR/\'%s\'/g" %smyproject/myproject/settings.py' % (data_dir_vm.replace('/', '\/'), target_dir)]
-#     return (0, 'Success!', res)
-# 
-# INIT_CMDS = {
-#     # <g_key>: []
-#     'django:1.8.4': {
-#         'params': {},
-#         'func': init_django,
-#     }
-# }
-
-TOPIC_INCLUDES = {
+TOPIC_INCLUDES = {  # 和 allspark 中 topic_support 保持一致
     # <Topic Name>: [<Template Type>, ]
     "webfront": ["web"],
     "webserver": ["django"],
